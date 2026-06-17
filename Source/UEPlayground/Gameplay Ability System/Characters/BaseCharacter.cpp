@@ -1,6 +1,7 @@
 #include "BaseCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "UEPlayground/Gameplay Ability System/AttributeSets/BasicAttributeSet.h"
 
 /*------------------------------------------------------------
 | --- Constructor: Sets default values for BaseCharacter --- |
@@ -13,6 +14,9 @@ ABaseCharacter::ABaseCharacter()
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(ASCReplicationMode);
+	
+	// Add the Basic Attribute Set
+	BasicAttributeSet = CreateDefaultSubobject<UBasicAttributeSet>(TEXT("BasicAttributeSet"));
 	
 	// Character Movement Component configuration
 	/*-----------------------------------------*/

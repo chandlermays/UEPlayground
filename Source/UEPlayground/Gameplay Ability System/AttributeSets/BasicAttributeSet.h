@@ -1,0 +1,48 @@
+﻿#pragma once
+
+#include "CoreMinimal.h"
+#include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
+#include "BasicAttributeSet.generated.h"
+
+
+UCLASS()
+class UEPLAYGROUND_API UBasicAttributeSet : public UAttributeSet
+{
+	GENERATED_BODY()
+	
+public:
+	UBasicAttributeSet();
+	
+	// Attribute Variables
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing=OnRep_Health)
+	FGameplayAttributeData Health;
+	ATTRIBUTE_ACCESSORS_BASIC(UBasicAttributeSet, Health);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing=OnRep_MaxHealth)
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS_BASIC(UBasicAttributeSet, MaxHealth);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing=OnRep_Stamina)
+	FGameplayAttributeData Stamina;
+	ATTRIBUTE_ACCESSORS_BASIC(UBasicAttributeSet, Stamina);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing=OnRep_MaxStamina)
+	FGameplayAttributeData MaxStamina;
+	ATTRIBUTE_ACCESSORS_BASIC(UBasicAttributeSet, MaxStamina);
+	
+	// Attribute Methods
+	UFUNCTION()
+	void OnRep_Health(const FGameplayAttributeData& oldHealth) const;
+	
+	UFUNCTION()
+	void OnRep_MaxHealth(const FGameplayAttributeData& oldMaxHealth) const;
+	
+	UFUNCTION()
+	void OnRep_Stamina(const FGameplayAttributeData& oldStamina) const;
+	
+	UFUNCTION()
+	void OnRep_MaxStamina(const FGameplayAttributeData& oldMaxStamina) const;
+	
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+};

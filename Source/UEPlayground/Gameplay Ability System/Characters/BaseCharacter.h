@@ -16,10 +16,13 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	UAbilitySystemComponent* AbilitySystemComponent;													// Ability System Component reference
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
+	class UBasicAttributeSet* BasicAttributeSet;														// Basic Attribute Set reference
 
 protected:
 	virtual void BeginPlay() override;																	// Called when the game starts or when spawned
-	virtual void PossessedBy(AController* NewController) override;											// Called when the character is possessed by a controller
+	virtual void PossessedBy(AController* NewController) override;										// Called when the character is possessed by a controller
 	virtual void OnRep_PlayerState() override;															// Called on clients when the PlayerState is replicated
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilitySystem")
