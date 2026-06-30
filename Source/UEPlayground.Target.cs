@@ -8,8 +8,8 @@ public class UEPlaygroundTarget : TargetRules
 	public UEPlaygroundTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V5;
-
+		DefaultBuildSettings = BuildSettingsVersion.V6;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
 		ExtraModuleNames.AddRange( new string[] { "UEPlayground" } );
 	}
 }
