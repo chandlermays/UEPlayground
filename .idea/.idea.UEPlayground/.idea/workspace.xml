@@ -21,14 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5bf8df71-901b-43fc-8741-a50cf3e8e867" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UEPlayground/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UEPlayground/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Characters/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Characters/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/BP_BaseWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/BP_BaseWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/BP_SwordOne.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/BP_SwordOne.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/BP_WeaponsManagerComponent.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/BP_WeaponsManagerComponent.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/Data/S_WeaponConfig.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Weapons/Data/S_WeaponConfig.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Widgets/W_AbilitySlots.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UEPlayground/GameplayAbilitySystem/Widgets/W_AbilitySlots.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UEPlayground/Gameplay Ability System/Characters/BaseCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UEPlayground/Gameplay Ability System/Characters/BaseCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UEPlayground/Gameplay Ability System/Characters/BaseCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UEPlayground/Gameplay Ability System/Characters/BaseCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,34 +136,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ Project.UEPlayground.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Notification.DisplayName-DoNotAsk-Uproject Promotion": "Suggest opening Uproject",
-    "Notification.DisplayName-DoNotAsk-WindowsDefender": "Microsoft Defender may affect IDE",
-    "Notification.DisplayName-DoNotAsk-git.bad.executable": "Cannot Run Git",
-    "Notification.DoNotAsk-Uproject Promotion": "true",
-    "Notification.DoNotAsk-WindowsDefender": "true",
-    "Notification.DoNotAsk-git.bad.executable": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ Project.UEPlayground.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Uproject Promotion&quot;: &quot;Suggest opening Uproject&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-WindowsDefender&quot;: &quot;Microsoft Defender may affect IDE&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-git.bad.executable&quot;: &quot;Cannot Run Git&quot;,
+    &quot;Notification.DoNotAsk-Uproject Promotion&quot;: &quot;true&quot;,
+    &quot;Notification.DoNotAsk-WindowsDefender&quot;: &quot;true&quot;,
+    &quot;Notification.DoNotAsk-git.bad.executable&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C/C++ Project.UEPlayground">
     <configuration name="UE5" type="CppProject" factoryName="C++ Project">
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
@@ -320,6 +313,9 @@
       <workItem from="1782752926258" duration="6000" />
       <workItem from="1782753545450" duration="3317000" />
       <workItem from="1783277119801" duration="4571000" />
+      <workItem from="1783344778971" duration="60000" />
+      <workItem from="1783344859925" duration="524000" />
+      <workItem from="1783345554950" duration="298000" />
     </task>
     <servers />
   </component>

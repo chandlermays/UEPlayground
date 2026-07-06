@@ -1,18 +1,18 @@
 #include "PlaygroundAbilitySystemComponent.h"
 
+#include "Characters/BaseCharacter.h"
 
-// Sets default values for this component's properties
+/*-------------------------------------------------------------------------------
+| --- Constructor: Sets default values for PlaygroundAbilitySystemComponent --- |
+-------------------------------------------------------------------------------*/
 UPlaygroundAbilitySystemComponent::UPlaygroundAbilitySystemComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
-
-// Called when the game starts
+/*----------------------------------------------------------------
+| --- BeginPlay: Called when the game starts or when spawned --- |
+----------------------------------------------------------------*/
 void UPlaygroundAbilitySystemComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -21,13 +21,48 @@ void UPlaygroundAbilitySystemComponent::BeginPlay()
 	
 }
 
+/*----------------------------------------------------------------------------------------------------
+| --- OnRep_ActivateAbilities: 
+----------------------------------------------------------------------------------------------------*/
+void UPlaygroundAbilitySystemComponent::OnRep_ActivateAbilities()
+{
+	Super::OnRep_ActivateAbilities();
+	
+	ABaseCharacter* pCharacter = Cast<ABaseCharacter>(this->GetOwner());
+	if (!pCharacter)
+		return;
+	
+	bool bAbilitiesChanged = false;
+	
+	if (LastActivatableAbilities.Num() != ActivatableAbilities.Items.Num())
+	{
+		bAbilitiesChanged = true;
+	}
+	else
+	{
+		for (int32 i = 0; i < ActivatableAbilities.Items.Num(); ++i)
+		{
+			if (LastActivatableAbilities[i].Ability != ActivatableAbilities.Items[i].Ability)
+			{
+				bAbilitiesChanged = true;
+				break;
+			}
+		}
+	}
+	
+	if (bAbilitiesChanged)
+	{
+		pCharacter->SendAbilitiesChangedEvent();
+		LastActivatableAbilities = ActivatableAbilities.Items;
+	}
+}
 
-// Called every frame
-void UPlaygroundAbilitySystemComponent::TickComponent(float DeltaTime, ELevelTick TickType,
-                                                      FActorComponentTickFunction* ThisTickFunction)
+/*-------------------------------------------
+| --- TickComponent: Called every frame --- |
+-------------------------------------------*/
+void UPlaygroundAbilitySystemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
 }
-

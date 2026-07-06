@@ -4,21 +4,21 @@
 #include "AbilitySystemComponent.h"
 #include "PlaygroundAbilitySystemComponent.generated.h"
 
-
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class UEPLAYGROUND_API UPlaygroundAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
-	UPlaygroundAbilitySystemComponent();
+	UPlaygroundAbilitySystemComponent();																							// Constructor
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	virtual void BeginPlay() override;																								// Called when the game starts or when spawned
 
+	void OnRep_ActivateAbilities() override;
+	
+	TArray<FGameplayAbilitySpec> LastActivatableAbilities;
+	
 public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;		// Called every frame
 };
