@@ -107,15 +107,17 @@ UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 ---------------------------------------------------------------------------------------*/
 TArray<FGameplayAbilitySpecHandle> ABaseCharacter::GrantAbilities(TArray<TSubclassOf<UGameplayAbility>> AbilitiesToGrant)
 {
+	// return empty array if null - OR - not on the server
 	if (!AbilitySystemComponent || !HasAuthority())
-	{
-		// return empty array if null - OR - not on the server
 		return TArray<FGameplayAbilitySpecHandle>();
-	}
 	
 	TArray<FGameplayAbilitySpecHandle> AbilityHandles;
 	for (TSubclassOf<UGameplayAbility> Ability : AbilitiesToGrant)
 	{
+		// ignore any blank/'None' entries
+		if (!Ability)
+			continue;
+		
 		FGameplayAbilitySpecHandle SpecHandle = AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability, 1, -1, this));
 		AbilityHandles.Add(SpecHandle);
 	}
@@ -130,11 +132,9 @@ TArray<FGameplayAbilitySpecHandle> ABaseCharacter::GrantAbilities(TArray<TSubcla
 ---------------------------------------------------------------------------------*/
 void ABaseCharacter::RemoveAbilities(TArray<FGameplayAbilitySpecHandle> AbilityHandlesToRemove)
 {
+	// return if null - OR - not on the server
 	if (!AbilitySystemComponent || !HasAuthority())
-	{
-		// return if null - OR - not on the server
 		return;
-	}
 	
 	for (FGameplayAbilitySpecHandle AbilityHandle : AbilityHandlesToRemove)
 	{

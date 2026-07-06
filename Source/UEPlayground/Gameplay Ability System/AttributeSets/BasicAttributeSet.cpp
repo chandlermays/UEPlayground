@@ -18,17 +18,17 @@ void UBasicAttributeSet::OnRep_Health(const FGameplayAttributeData& oldHealth) c
 
 void UBasicAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& oldMaxHealth) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, Health, oldMaxHealth);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, MaxHealth, oldMaxHealth);
 }
 
 void UBasicAttributeSet::OnRep_Stamina(const FGameplayAttributeData& oldStamina) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, Health, oldStamina);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, Stamina, oldStamina);
 }
 
 void UBasicAttributeSet::OnRep_MaxStamina(const FGameplayAttributeData& oldMaxStamina) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, Health, oldMaxStamina);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, MaxStamina, oldMaxStamina);
 }
 
 void UBasicAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const

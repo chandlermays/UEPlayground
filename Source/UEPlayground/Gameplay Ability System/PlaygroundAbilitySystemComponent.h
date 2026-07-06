@@ -15,9 +15,9 @@ public:
 protected:
 	virtual void BeginPlay() override;																								// Called when the game starts or when spawned
 
-	void OnRep_ActivateAbilities() override;
+	virtual void OnRep_ActivateAbilities() override;																				// Called on clients when the activatable abilities array is replicated
 	
-	TArray<FGameplayAbilitySpec> LastActivatableAbilities;
+	TArray<FGameplayAbilitySpec> LastActivatableAbilities;																			// An array of the last activatable abilities
 	
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;		// Called every frame

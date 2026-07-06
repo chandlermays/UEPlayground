@@ -21,9 +21,9 @@ void UPlaygroundAbilitySystemComponent::BeginPlay()
 	
 }
 
-/*----------------------------------------------------------------------------------------------------
-| --- OnRep_ActivateAbilities: 
-----------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------
+| --- OnRep_ActivateAbilities: Called on clients when the activatable abilities array is replicated --- |
+-------------------------------------------------------------------------------------------------------*/
 void UPlaygroundAbilitySystemComponent::OnRep_ActivateAbilities()
 {
 	Super::OnRep_ActivateAbilities();

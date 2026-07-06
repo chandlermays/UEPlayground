@@ -12,4 +12,7 @@ class UEPLAYGROUND_API UPlaygroundGameplayAbility : public UGameplayAbility
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 	bool ShowInAbilityContainer = false;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	FText AbilityDisplayName;
 };
