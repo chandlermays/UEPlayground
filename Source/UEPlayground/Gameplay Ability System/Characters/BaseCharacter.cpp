@@ -1,6 +1,9 @@
 #include "BaseCharacter.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "UEPlayground/Gameplay Ability System/PlaygroundAbilitySystemComponent.h"
 #include "UEPlayground/Gameplay Ability System/AttributeSets/BasicAttributeSet.h"
 
 /*------------------------------------------------------------
@@ -11,7 +14,7 @@ ABaseCharacter::ABaseCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	// Add the Ability System Component
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent = CreateDefaultSubobject<UPlaygroundAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(ASCReplicationMode);
 	
@@ -58,6 +61,7 @@ void ABaseCharacter::PossessedBy(AController* NewController)
 	if (AbilitySystemComponent)
 	{
 		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+		GrantAbilities(StartingAbilities);
 	}
 }
 
@@ -96,4 +100,59 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+/*---------------------------------------------------------------------------------------
+| --- GrantAbilities: Grants a list of gameplay abilities and returns their handles --- |
+---------------------------------------------------------------------------------------*/
+TArray<FGameplayAbilitySpecHandle> ABaseCharacter::GrantAbilities(TArray<TSubclassOf<UGameplayAbility>> AbilitiesToGrant)
+{
+	if (!AbilitySystemComponent || !HasAuthority())
+	{
+		// return empty array if null - OR - not on the server
+		return TArray<FGameplayAbilitySpecHandle>();
+	}
+	
+	TArray<FGameplayAbilitySpecHandle> AbilityHandles;
+	for (TSubclassOf<UGameplayAbility> Ability : AbilitiesToGrant)
+	{
+		FGameplayAbilitySpecHandle SpecHandle = AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability, 1, -1, this));
+		AbilityHandles.Add(SpecHandle);
+	}
+	
+	SendAbilitiesChangedEvent();
+	
+	return AbilityHandles;
+}
+
+/*---------------------------------------------------------------------------------
+| --- RemoveAbilities: Clears a list of previously granted gameplay abilities --- |
+---------------------------------------------------------------------------------*/
+void ABaseCharacter::RemoveAbilities(TArray<FGameplayAbilitySpecHandle> AbilityHandlesToRemove)
+{
+	if (!AbilitySystemComponent || !HasAuthority())
+	{
+		// return if null - OR - not on the server
+		return;
+	}
+	
+	for (FGameplayAbilitySpecHandle AbilityHandle : AbilityHandlesToRemove)
+	{
+		AbilitySystemComponent->ClearAbility(AbilityHandle);
+	}
+	
+	SendAbilitiesChangedEvent();
+}
+
+/*---------------------------------------------------------------------------------------------------------
+| --- SendAbilitiesChangedEvent: Broadcasts a gameplay event when the character's ability set changes --- |
+---------------------------------------------------------------------------------------------------------*/
+void ABaseCharacter::SendAbilitiesChangedEvent()
+{
+	FGameplayEventData EventData;
+	EventData.EventTag = FGameplayTag::RequestGameplayTag(FName("Event.Abilities.Changed"));
+	EventData.Instigator = this;
+	EventData.Target = this;
+	
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, EventData.EventTag, EventData);
 }
