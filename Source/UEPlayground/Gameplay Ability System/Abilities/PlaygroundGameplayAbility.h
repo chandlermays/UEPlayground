@@ -10,6 +10,8 @@ class UEPLAYGROUND_API UPlaygroundGameplayAbility : public UGameplayAbility
 	GENERATED_BODY()
 	
 public:
+	UPlaygroundGameplayAbility();
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 	bool ShowInAbilityContainer = false;
 	
