@@ -3,6 +3,9 @@
 #include "GameplayEffectExtension.h"
 #include "Net/UnrealNetwork.h"
 
+/*----------------------------------------------------------------
+| --- Constructor: Sets default values for BasicAttributeSet --- |
+----------------------------------------------------------------*/
 UBasicAttributeSet::UBasicAttributeSet()
 {
 	Health = 100.0f;
@@ -11,26 +14,41 @@ UBasicAttributeSet::UBasicAttributeSet()
 	MaxStamina = 100.0f;
 }
 
+/*-----------------------------------------------------------------------
+| --- OnRep_Health: Called on clients when the Health is replicated --- |
+-----------------------------------------------------------------------*/
 void UBasicAttributeSet::OnRep_Health(const FGameplayAttributeData& oldHealth) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, Health, oldHealth);
 }
 
+/*-----------------------------------------------------------------------------
+| --- OnRep_MaxHealth: Called on clients when the MaxHealth is replicated --- |
+-----------------------------------------------------------------------------*/
 void UBasicAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& oldMaxHealth) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, MaxHealth, oldMaxHealth);
 }
 
+/*-------------------------------------------------------------------------
+| --- OnRep_Stamina: Called on clients when the Stamina is replicated --- |
+-------------------------------------------------------------------------*/
 void UBasicAttributeSet::OnRep_Stamina(const FGameplayAttributeData& oldStamina) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, Stamina, oldStamina);
 }
 
+/*-------------------------------------------------------------------------------
+| --- OnRep_MaxStamina: Called on clients when the MaxStamina is replicated --- |
+-------------------------------------------------------------------------------*/
 void UBasicAttributeSet::OnRep_MaxStamina(const FGameplayAttributeData& oldMaxStamina) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, MaxStamina, oldMaxStamina);
 }
 
+/*-----------------------------------------------------------------------------------------------------
+| --- GetLifetimeReplicatedProps: 
+-----------------------------------------------------------------------------------------------------*/
 void UBasicAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -41,6 +59,9 @@ void UBasicAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 	DOREPLIFETIME_CONDITION_NOTIFY(UBasicAttributeSet, MaxStamina, COND_None, REPNOTIFY_Always);
 }
 
+/*----------------------------------------------------------------------------------------------------
+| --- PreAttributeChange: 
+----------------------------------------------------------------------------------------------------*/
 void UBasicAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
@@ -55,7 +76,10 @@ void UBasicAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute,
 	}
 }
 
-void UBasicAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
+/*----------------------------------------------------------------------------------------------------
+| --- PostGameplayExecute:
+----------------------------------------------------------------------------------------------------*/
+void UBasicAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
 	
@@ -63,6 +87,13 @@ void UBasicAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectM
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
 		SetHealth(GetHealth());
+
+		if (Data.EffectSpec.Def->GetAssetTags().HasTag(FGameplayTag::RequestGameplayTag("Effects.HitReaction")))
+		{
+			FGameplayTagContainer HitReactionTagContainer;
+			HitReactionTagContainer.AddTag(FGameplayTag::RequestGameplayTag("GameplayAbility.HitReaction"));
+			GetOwningAbilitySystemComponent()->TryActivateAbilitiesByTag(HitReactionTagContainer);
+		}
 	}
 	else if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
 	{

@@ -24,12 +24,16 @@ protected:
 	virtual void BeginPlay() override;																				// Called when the game starts or when spawned
 	virtual void PossessedBy(AController* NewController) override;													// Called when the character is possessed by a controller
 	virtual void OnRep_PlayerState() override;																		// Called on clients when the PlayerState is replicated
-	
+	virtual void OnDeadTagChanged(const FGameplayTag CallbackTag, int32 NewCount);									// Called when the 'Dead' Tag is changed
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilitySystem")
 	EGameplayEffectReplicationMode ASCReplicationMode = EGameplayEffectReplicationMode::Mixed;						// Replication mode for the Ability System Component
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilitySystem")
 	TArray<TSubclassOf<UGameplayAbility>> StartingAbilities;														// An array of starting Gameplay Ability classes
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Damage")
+	void HandleDeath();																								// 
 	
 public:	
 	virtual void Tick(float DeltaTime) override;																	// Called every frame
