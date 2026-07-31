@@ -2,5 +2,6 @@
 
 UPlaygroundGameplayAbility::UPlaygroundGameplayAbility()
 {
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Active")));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag("GameplayAbility.Active"));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag("State.Dead"));
 }

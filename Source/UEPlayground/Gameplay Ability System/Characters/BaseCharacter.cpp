@@ -17,10 +17,10 @@ ABaseCharacter::ABaseCharacter()
 	AbilitySystemComponent = CreateDefaultSubobject<UPlaygroundAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(ASCReplicationMode);
-	AbilitySystemComponent->RegisterGameplayTagEvent(FGameplayTag::RequestGameplayTag("State.Dead")).AddUObject(this, &ACharacter::OnDeadTagChanged);
 	
 	// Add the Basic Attribute Set
 	BasicAttributeSet = CreateDefaultSubobject<UBasicAttributeSet>(TEXT("BasicAttributeSet"));
+
 	
 	// Character Movement Component configuration
 	/*-----------------------------------------*/
@@ -50,6 +50,11 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->RegisterGameplayTagEvent(FGameplayTag::RequestGameplayTag("State.Dead")).AddUObject(this, &ABaseCharacter::OnDeadTagChanged);
+	}
 }
 
 /*-----------------------------------------------------------------------------
@@ -80,20 +85,9 @@ void ABaseCharacter::OnRep_PlayerState()
 }
 
 /*-----------------------------------------------------------------
-| --- OnDeadTagChanged: Called when the 'Dead' Tag is changed --- |
+| --- HandleDeath_Implementation: 
 -----------------------------------------------------------------*/
-void ABaseCharacter::OnDeadTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
-{
-	if (NewCount > 0)
-	{
-		HandleDeath();
-	}
-}
-
-/*-----------------------------------------------------------------
-| --- HandleDeath: 
------------------------------------------------------------------*/
-void ABaseCharacter::HandleDeath()
+void ABaseCharacter::HandleDeath_Implementation()
 {
 	GetMesh()->SetSimulatePhysics(true);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -103,6 +97,17 @@ void ABaseCharacter::HandleDeath()
 	FVector Impulse = GetActorForwardVector() * -20000;
 	Impulse.Z = 15000;
 	GetMesh()->AddImpulseAtLocation(Impulse, GetActorLocation());
+}
+
+/*-----------------------------------------------------------------
+| --- OnDeadTagChanged: Called when the 'Dead' Tag is changed --- |
+-----------------------------------------------------------------*/
+void ABaseCharacter::OnDeadTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	if (NewCount > 0)
+	{
+		HandleDeath_Implementation();
+	}
 }
 
 /*----------------------------------
