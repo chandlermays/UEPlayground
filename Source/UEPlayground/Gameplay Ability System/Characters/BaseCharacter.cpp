@@ -84,9 +84,9 @@ void ABaseCharacter::OnRep_PlayerState()
 	}
 }
 
-/*-----------------------------------------------------------------
-| --- HandleDeath_Implementation: 
------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------
+| --- HandleDeath_Implementation: Called when the character's 'Dead' Tag is added to the Ability System Component --- |
+---------------------------------------------------------------------------------------------------------------------*/
 void ABaseCharacter::HandleDeath_Implementation()
 {
 	GetMesh()->SetSimulatePhysics(true);

@@ -46,9 +46,9 @@ void UBasicAttributeSet::OnRep_MaxStamina(const FGameplayAttributeData& oldMaxSt
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBasicAttributeSet, MaxStamina, oldMaxStamina);
 }
 
-/*-----------------------------------------------------------------------------------------------------
-| --- GetLifetimeReplicatedProps: 
------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+| --- GetLifetimeReplicatedProps: Defines the properties that should be replicated over the network for this class --- |
+----------------------------------------------------------------------------------------------------------------------*/
 void UBasicAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -59,9 +59,9 @@ void UBasicAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 	DOREPLIFETIME_CONDITION_NOTIFY(UBasicAttributeSet, MaxStamina, COND_None, REPNOTIFY_Always);
 }
 
-/*----------------------------------------------------------------------------------------------------
-| --- PreAttributeChange: 
-----------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------------------------
+| --- PreAttributeChange: Called just before any modification happens to an attribute's base value when an attribute aggregator exists --- |
+------------------------------------------------------------------------------------------------------------------------------------------*/
 void UBasicAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
@@ -76,9 +76,9 @@ void UBasicAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute,
 	}
 }
 
-/*----------------------------------------------------------------------------------------------------
-| --- PostGameplayExecute:
-----------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+| --- PostGameplayExecute: Called just after a GameplayEffect is executed to modify the base value of an attribute --- |
+----------------------------------------------------------------------------------------------------------------------*/
 void UBasicAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
@@ -101,9 +101,9 @@ void UBasicAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	}
 }
 
-/*----------------------------------------------------------------------------------------------------
-| --- PostGameplayExecute:
-----------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+| --- PostGameplayExecute: Called just after a GameplayEffect is executed to modify the base value of an attribute --- |
+----------------------------------------------------------------------------------------------------------------------*/
 void UBasicAttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
 {
 	Super::PostAttributeChange(Attribute, OldValue, NewValue);

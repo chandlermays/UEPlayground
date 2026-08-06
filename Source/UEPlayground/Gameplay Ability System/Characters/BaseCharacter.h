@@ -33,7 +33,7 @@ protected:
 	TArray<TSubclassOf<UGameplayAbility>> StartingAbilities;														// An array of starting Gameplay Ability classes
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Damage")
-	void HandleDeath();																								// 
+	void HandleDeath();																								// Called when the character's 'Dead' Tag is added to the Ability System Component
 	
 public:	
 	virtual void Tick(float DeltaTime) override;																	// Called every frame
